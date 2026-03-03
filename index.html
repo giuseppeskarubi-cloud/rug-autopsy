@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rug Autopsy PRO — AI-Powered Crypto Scam Detection</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --red:#ef4444;--orange:#f97316;--purple:#8b5cf6;--indigo:#6366f1;
+    --bg:#0a0f1e;--bg2:#0f172a;--bg3:#1e293b;--border:#1e293b;
+    --text:#e2e8f0;--muted:#64748b;--subtle:#334155;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,15,30,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-logo{font-size:18px;font-weight:800;background:linear-gradient(90deg,#ef4444,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{color:var(--muted);font-size:14px;text-decoration:none;transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{background:linear-gradient(135deg,#ef4444,#f97316);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(239,68,68,0.12),transparent),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(99,102,241,0.08),transparent);pointer-events:none;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:20px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);font-size:12px;font-weight:600;color:#ef4444;margin-bottom:24px;animation:fadeUp .6s ease both;}
+  .hero h1{font-size:clamp(36px,6vw,72px);font-weight:900;line-height:1.05;margin-bottom:20px;animation:fadeUp .6s .1s ease both;opacity:0;}
+  .hero h1 span{background:linear-gradient(90deg,#ef4444,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero p{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:36px;animation:fadeUp .6s .2s ease both;opacity:0;}
+  .hero-stats{display:flex;gap:40px;margin-top:56px;animation:fadeUp .6s .4s ease both;opacity:0;flex-wrap:wrap;justify-content:center;}
+  .stat{text-align:center;}
+  .stat-num{font-size:28px;font-weight:900;background:linear-gradient(90deg,#ef4444,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .stat-label{font-size:12px;color:var(--muted);margin-top:2px;}
+  .ticker{background:rgba(239,68,68,0.06);border-top:1px solid rgba(239,68,68,0.15);border-bottom:1px solid rgba(239,68,68,0.15);padding:12px 0;overflow:hidden;white-space:nowrap;}
+  .ticker-inner{display:inline-flex;gap:48px;animation:ticker 30s linear infinite;}
+  .ticker-item{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+  .ticker-item span{color:#ef4444;font-weight:700;}
+  .features{padding:80px 24px;max-width:1100px;margin:0 auto;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--indigo);text-transform:uppercase;margin-bottom:10px;text-align:center;}
+  .section-title{font-size:clamp(24px,4vw,40px);font-weight:800;text-align:center;margin-bottom:12px;line-height:1.2;}
+  .section-sub{font-size:16px;color:var(--muted);text-align:center;margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto;}
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:48px;}
+  .feature-card{background:var(--bg2);border-radius:16px;padding:24px;border:1px solid var(--border);transition:all .3s;}
+  .feature-card:hover{border-color:rgba(239,68,68,0.3);transform:translateY(-4px);}
+  .feature-icon{font-size:28px;margin-bottom:14px;}
+  .feature-title{font-size:17px;font-weight:700;margin-bottom:8px;}
+  .feature-desc{font-size:14px;color:var(--muted);line-height:1.6;}
+  .feature-tag{display:inline-block;margin-top:12px;font-size:10px;padding:3px 10px;border-radius:20px;font-weight:700;}
+  .tag-live{background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.2);}
+  .tag-ai{background:rgba(99,102,241,0.1);color:#6366f1;border:1px solid rgba(99,102,241,0.2);}
+  .tag-free{background:rgba(249,115,22,0.1);color:#f97316;border:1px solid rgba(249,115,22,0.2);}
+  .how{padding:80px 24px;max-width:800px;margin:0 auto;}
+  .steps{display:flex;flex-direction:column;gap:0;margin-top:48px;position:relative;}
+  .steps::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#ef4444,#6366f1);opacity:.3;}
+  .step{display:flex;gap:20px;align-items:flex-start;padding-bottom:36px;}
+  .step-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#f97316);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;flex-shrink:0;position:relative;z-index:1;}
+  .step-content{padding-top:12px;}
+  .step-title{font-size:18px;font-weight:700;margin-bottom:6px;}
+  .step-desc{font-size:14px;color:var(--muted);line-height:1.6;}
+  .step-apis{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .api-chip{font-size:10px;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--muted);border:1px solid var(--subtle);}
+  .testimonials{padding:80px 24px;max-width:900px;margin:0 auto;}
+  .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:48px;}
+  .test-card{background:var(--bg2);border-radius:16px;padding:22px;border:1px solid var(--border);}
+  .test-text{font-size:14px;color:#94a3b8;line-height:1.7;margin-bottom:16px;font-style:italic;}
+  .test-author{display:flex;align-items:center;gap:10px;}
+  .test-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;}
+  .test-name{font-size:13px;font-weight:700;}
+  .test-role{font-size:11px;color:var(--muted);}
+  .stars{color:#f59e0b;font-size:12px;margin-bottom:10px;}
+  .cta{padding:80px 24px;text-align:center;}
+  .cta-box{max-width:600px;margin:0 auto;background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(99,102,241,0.08));border:1px solid rgba(239,68,68,0.2);border-radius:24px;padding:56px 40px;}
+  .cta h2{font-size:clamp(28px,4vw,40px);font-weight:900;margin-bottom:12px;}
+  .cta p{color:var(--muted);font-size:16px;margin-bottom:32px;}
+  .btn-primary{background:linear-gradient(135deg,#ef4444,#f97316);color:#fff;border:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 0 30px rgba(239,68,68,0.3);}
+  .btn-secondary{background:transparent;color:var(--text);border:1px solid var(--subtle);padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;}
+  footer{padding:40px 24px;border-top:1px solid var(--border);text-align:center;}
+  .footer-logo{font-size:20px;font-weight:800;background:linear-gradient(90deg,#ef4444,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;}
+  .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+  .footer-links a{color:var(--muted);font-size:13px;text-decoration:none;}
+  .footer-disclaimer{font-size:11px;color:var(--subtle);max-width:500px;margin:0 auto;}
+  .orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;}
+  .orb1{width:400px;height:400px;background:rgba(239,68,68,0.06);top:-100px;right:-100px;}
+  .orb2{width:300px;height:300px;background:rgba(99,102,241,0.05);bottom:200px;left:-100px;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media(max-width:600px){.nav-links{display:none;}.hero-stats{gap:24px;}}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<nav>
+  <div class="nav-logo">🔬 Rug Autopsy</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Launch App</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">🚨 AI-Powered Crypto Security</div>
+  <h1>Detect Rug Pulls<br/><span>Before They Happen</span></h1>
+  <p>Real-time on-chain analysis powered by AI. Check any token on Ethereum, BNB Chain or Solana in seconds — before you invest.</p>
+  <div id="crypto-ticker-hero" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px;min-height:36px;animation:fadeUp .6s .3s ease both;opacity:0;"></div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Rug DB patterns</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Live data sources</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Chains supported</div></div>
+    <div class="stat"><div class="stat-num">&lt;10s</div><div class="stat-label">Analysis time</div></div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item">🔴 <span>SQUID GAME TOKEN</span> Exit Scam · $2.8B wiped</div>
+    <div class="ticker-item">🔴 <span>ANUBISDAO</span> LP Drained · $60M gone in 20h</div>
+    <div class="ticker-item">🔴 <span>FROSTIES NFT</span> Team vanished post-mint</div>
+    <div class="ticker-item">🔴 <span>SAFEMOON</span> Slow Rug · $6B peak</div>
+    <div class="ticker-item">🔴 <span>TURTLEDEX</span> LP removed gradually</div>
+    <div class="ticker-item">🔴 <span>DEFI100</span> Exit Scam · $32M</div>
+    <div class="ticker-item">🔴 <span>SQUID GAME TOKEN</span> Exit Scam · $2.8B wiped</div>
+    <div class="ticker-item">🔴 <span>ANUBISDAO</span> LP Drained · $60M gone in 20h</div>
+    <div class="ticker-item">🔴 <span>FROSTIES NFT</span> Team vanished post-mint</div>
+    <div class="ticker-item">🔴 <span>SAFEMOON</span> Slow Rug · $6B peak</div>
+    <div class="ticker-item">🔴 <span>TURTLEDEX</span> LP removed gradually</div>
+    <div class="ticker-item">🔴 <span>DEFI100</span> Exit Scam · $32M</div>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything you need to stay protected</h2>
+  <p class="section-sub">Rug Autopsy combines live blockchain data with AI reasoning.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <div class="feature-title">GoPlus Security Scan</div>
+      <div class="feature-desc">Deep contract analysis — honeypot detection, tax rates, mint authority, proxy contracts, hidden owner and more.</div>
+      <span class="feature-tag tag-live">● LIVE DATA</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">DexScreener Markets</div>
+      <div class="feature-desc">Real-time price, liquidity depth, volume, buy/sell ratio and pair age directly from decentralized exchanges.</div>
+      <span class="feature-tag tag-live">● LIVE DATA</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👤</div>
+      <div class="feature-title">Deployer History</div>
+      <div class="feature-desc">Full background check on the wallet that deployed the contract. Has this address rugged before?</div>
+      <span class="feature-tag tag-live">● LIVE DATA</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Launch Pattern Detection</div>
+      <div class="feature-desc">Identifies dangerous early-stage patterns: extreme pumps, sell pressure anomalies, age-based risk.</div>
+      <span class="feature-tag tag-ai">✦ AI POWERED</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">☠️</div>
+      <div class="feature-title">Rug Pull DB Matching</div>
+      <div class="feature-desc">Compares the token against 12+ verified historical rug pulls — Squid Game, AnubisDAO, SafeMoon and more.</div>
+      <span class="feature-tag tag-ai">✦ AI POWERED</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📄</div>
+      <div class="feature-title">Downloadable Report</div>
+      <div class="feature-desc">Export a full security report with all on-chain data, red flags, verdict and historical comparisons.</div>
+      <span class="feature-tag tag-free">★ ALL USERS</span>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title">From address to verdict<br/>in under 10 seconds</h2>
+  <p class="section-sub">Five data sources, one unified AI analysis.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Paste the contract address</div>
+        <div class="step-desc">Enter any token contract on Ethereum, BNB Chain or Solana.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Live data fetched in parallel</div>
+        <div class="step-desc">Four independent sources queried simultaneously.</div>
+        <div class="step-apis">
+          <span class="api-chip">GoPlus Security</span>
+          <span class="api-chip">DexScreener</span>
+          <span class="api-chip">Etherscan / Solscan</span>
+          <span class="api-chip">Deployer History</span>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Pattern matching against rug DB</div>
+        <div class="step-desc">Compared against 12+ verified historical rug pulls.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">AI synthesizes everything</div>
+        <div class="step-desc">Claude AI produces a Rug Score, archetype, red flags and final verdict.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">You decide — protected</div>
+        <div class="step-desc">Invest with confidence or walk away before it's too late.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="section-label">Community</div>
+  <h2 class="section-title">Trusted by the community</h2>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <div class="test-text">"Ran a check on a token my group was hyping. Score came back 91. Didn't buy. It rugged 6 hours later."</div>
+      <div class="test-author"><div class="test-avatar">A</div><div><div class="test-name">@alphatrader</div><div class="test-role">DeFi Investor</div></div></div>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <div class="test-text">"The deployer history feature alone has caught 3 serial ruggers in the last month."</div>
+      <div class="test-author"><div class="test-avatar">M</div><div><div class="test-name">@maxdefi</div><div class="test-role">Launchpad Operator</div></div></div>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <div class="test-text">"The historical scam matching is what really sets it apart from basic honeypot checkers."</div>
+      <div class="test-author"><div class="test-avatar">S</div><div><div class="test-name">@solsecurity</div><div class="test-role">Security Researcher</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="cta-box">
+    <div style="font-size:40px;margin-bottom:16px;">🔬</div>
+    <h2>Don't invest blind.<br/>Check first.</h2>
+    <p>Powered by live on-chain data and AI reasoning.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-primary">🔬 Launch App</button>
+      <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">How it works →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">🔬 Rug Autopsy PRO</div>
+  <div class="footer-links">
+    <a href="#">Features</a>
+    <a href="#">Twitter</a>
+    <a href="#">Telegram</a>
+    <a href="#">Terms</a>
+    <a href="#">Privacy</a>
+  </div>
+  <div class="footer-disclaimer">⚠️ For informational and educational purposes only. Not financial advice.</div>
+</footer>
+
+<script>
+  const coins = [
+    {s:'BTC',p:67420.50,c:2.34},{s:'ETH',p:3521.80,c:-1.12},
+    {s:'BNB',p:612.40,c:0.87},{s:'SOL',p:178.90,c:4.21},
+    {s:'XRP',p:0.6120,c:-0.45},{s:'ADA',p:0.4890,c:1.63},
+    {s:'AVAX',p:38.72,c:-2.10},{s:'DOGE',p:0.1623,c:3.45},
+    {s:'DOT',p:8.94,c:-0.78},{s:'LINK',p:18.33,c:1.95},
+  ];
+  function renderTicker(){
+    coins.forEach(c=>{
+      c.p=parseFloat((c.p*(1+(Math.random()-0.49)*0.002)).toFixed(c.p>=1?2:4));
+      c.c=parseFloat((c.c+(Math.random()-0.5)*0.05).toFixed(2));
+    });
+    const el=document.getElementById('crypto-ticker-hero');
+    el.innerHTML=coins.map(c=>{
+      const col=c.c>=0?'#22c55e':'#ef4444';
+      const arrow=c.c>=0?'▲':'▼';
+      const price=c.p>=1?'$'+c.p.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'$'+c.p.toFixed(4);
+      return `<div style="display:flex;align-items:center;gap:6px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:7px 14px;font-size:13px;white-space:nowrap;">
+        <span style="font-weight:700;color:#e2e8f0;">${c.s}</span>
+        <span style="color:#94a3b8;">${price}</span>
+        <span style="color:${col};font-weight:600;font-size:12px;">${arrow} ${Math.abs(c.c).toFixed(2)}%</span>
+      </div>`;
+    }).join('');
+  }
+  renderTicker();
+  setInterval(renderTicker,3000);
+
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});
+  },{threshold:0.1});
+  document.querySelectorAll('.feature-card,.test-card,.step').forEach(el=>{
+    el.style.opacity='0';el.style.transform='translateY(24px)';
+    el.style.transition='opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+  window.addEventListener('scroll',()=>{
+    document.querySelector('nav').style.boxShadow=window.scrollY>20?'0 4px 30px rgba(0,0,0,0.3)':'none';
+  });
+</script>
+</body>
+</html>
